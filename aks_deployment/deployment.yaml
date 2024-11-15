@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      initContainers:
+      - name: init-nginx
+        image: busybox
+        command: ['sh', '-c', 'echo "Initializing NGINX setup...."; sleep 3']
+      containers:
+      - name: nginx-container
+        image: conatinerregistry01.azurecr.io/nginxnonrooti:amd64
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "250m"
+          limits:
+            memory: "500Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1010
+        runAsGroup: 1010
+        fsGroup: 1010
