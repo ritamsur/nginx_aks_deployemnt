@@ -20,8 +20,7 @@ stages:
           repository: $(repository_name)
           command: 'buildAndPush'
           Dockerfile: '**/nginx_nonroot_docker/Dockerfile'
-          tags: |
-            v$(Build.BuildId)
+          tags: v$(Build.BuildId)
       
       # Publish Artifacts pipeline code in addition to Build and Push          
       - bash: echo Contents in System Default Working Directory; ls -R $(System.DefaultWorkingDirectory)        
