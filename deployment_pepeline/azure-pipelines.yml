@@ -16,7 +16,7 @@ stages:
       - task: Docker@2
         displayName: ImageBuildAndPush
         inputs:
-          containerRegistry: 'acr_service_connection'
+          containerRegistry: 'acr_container_service_connection'
           repository: $(repository_name)
           command: 'buildAndPush'
           Dockerfile: '**/nginx_nonroot_docker/Dockerfile'
