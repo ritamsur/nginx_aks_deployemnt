@@ -20,6 +20,6 @@ stages:
           command: 'buildAndPush'
           Dockerfile: '**/nginx_nonroot_docker/Dockerfile'
           tags: |
-            $(Build.SourceVersion)
+            $(Build.BuildId)
             
 
