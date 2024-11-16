@@ -13,5 +13,13 @@ stages:
         vmImage: 'ubuntu-latest'
       steps:
       # Task-1: Build Docker Image and push to Azure Container Registry ACR
-        
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'acr_service_connection'
+          repository: 'nginxtest'
+          command: 'buildAndPush'
+          Dockerfile: '**/Dockerfile'
+          tags: |
+            $(Build.SourceVersion)
+            
 
