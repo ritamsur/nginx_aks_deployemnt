@@ -20,7 +20,7 @@ spec:
         command: ['sh', '-c', 'echo "Initializing NGINX setup...."; sleep 3']
       containers:
       - name: nginx-container
-        image: conatinerregistry01.azurecr.io/nginxnonrooti:amd64
+        image: cregistryritz04.azurecr.io/nginxnonrooti
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
