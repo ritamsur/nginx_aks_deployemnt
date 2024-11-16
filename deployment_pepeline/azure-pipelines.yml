@@ -17,7 +17,7 @@ stages:
         displayName: ImageBuildAndPush
         inputs:
           containerRegistry: 'acr_service_connection'
-          repository: 'nginxtest'
+          repository: $(repository_name)
           command: 'buildAndPush'
           Dockerfile: '**/nginx_nonroot_docker/Dockerfile'
           tags: |
